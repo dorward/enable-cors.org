@@ -1,20 +1,22 @@
 ---
 layout: default
-title: enable cross-origin resource sharing
+title: Enable cross-origin resource sharing for Express.js
 ---
 
 	<div class="container">
 		<section>
-		<h1>CORS on ExpressJS</h1>
+		<h1>CORS on Express.js</h1>
 
-<p>
-				In your <a href="http://expressjs.com/">ExpressJS</a> app on <a href="http://nodejs.org/">node.js</a>, do the following with your routes:
-			</p>
-			<pre class="code">app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "YOUR-DOMAIN.TLD"); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+		<p>
+			In your <a href="http://expressjs.com/">Express.js</a> app on <a href="http://nodejs.org/">Node.js</a>:
+		</p>
+	        <p>Install <a href="https://www.npmjs.com/package/cors">the CORS middleware</a> from NPM</p>
+		<p>Then <code>use</code> it before any route that depends on it.</p>
+		<pre class="code">const cors = require('cors');
+app.use(cors({
+  origin: "YOUR-DOMAIN.TLD",
+  allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"]
+}));
 
 app.get('/', function(req, res, next) {
   // Handle the get for this route
@@ -24,5 +26,7 @@ app.post('/', function(req, res, next) {
  // Handle the post for this route
 });</pre>
 
+		<p>Do read <a href="https://www.npmjs.com/package/cors">the documentation</a> to learn how to tailor it for your specific needs.</p>
+			
 		</section>
 	</div>
